@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silk Road Car Club - Gallery</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Filter Dropdown -->
+<label for="carFilter"></label><select id="carFilter" class="form-select mb-3">
+    <option value="all">All Cars</option>
+    <option value="classic">Classic Cars</option>
+    <option value="sport">Sport Cars</option>
+    <option value="electric">Electric Cars</option>
+</select>
+
+<!-- Header -->
+<header class="bg-dark text-white py-3">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+            <h1 class="mb-0">Silk Road Car Club</h1>
+            <div>
+                <label for="themeToggle"></label><input type="checkbox" id="themeToggle" class="form-check-input"> Dark Mode
+            </div>
+            <nav class="navbar navbar-expand-lg navbar-dark">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="faq.html">FAQ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="gallery.html">Gallery</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<main class="container my-5">
+    <h2 class="mb-4">Our Collection</h2>
+
+    <!-- Custom Carousel with Bootstrap Design -->
+    <div id="carousel" class="carousel-container position-relative">
+        <div class="carousel-slide" data-category="sport">
+            <img src="../WEB_Technologies_1/images/car1.jpg" alt="Car 1" class="img-fluid">
+        </div>
+        <div class="carousel-slide" data-category="classic">
+            <img src="../WEB_Technologies_1/images/car2.jpg" alt="Car 2" class="img-fluid">
+        </div>
+        <div class="carousel-slide" data-category="sport">
+            <img src="../WEB_Technologies_1/images/car3.jpg" alt="Car 3" class="img-fluid">
+        </div>
+        <div class="carousel-slide" data-category="classic">
+            <img src="../WEB_Technologies_1/images/car4.jpg" alt="Car 4" class="img-fluid">
+        </div>
+        <div class="carousel-slide" data-category="electric">
+            <img src="../WEB_Technologies_1/images/car5.jpg" alt="Car 5" class="img-fluid">
+        </div>
+        <div class="carousel-slide" data-category="sport">
+            <img src="../WEB_Technologies_1/images/car6.jpg" alt="Car 6" class="img-fluid">
+        </div>
+
+        <!-- Navigation Buttons -->
+        <button id="prevBtn" class="carousel-control-prev btn btn-dark position-absolute start-0">❮</button>
+        <button id="nextBtn" class="carousel-control-next btn btn-dark position-absolute end-0">❯</button>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="bg-dark text-white py-4">
+    <div class="container text-center">
+        <p class="mb-1">© 2024 Silk Road Car Club</p>
+        <p class="mb-1">Yerassyl Sabyrrakhim | September 2024</p>
+        <p>Contact: <a href="mailto:231748@astanait.edu.kz" class="text-white text-decoration-underline">231748@astanait.edu.kz</a></p>
+    </div>
+</footer>
+
+<!-- JavaScript for Filtering and Custom Carousel -->
+<script>
+    let carSlides = Array.from(document.querySelectorAll('.carousel-slide'));
+    let currentSlide = 0;
+
+    // Function to update the active slide
+    function showSlide(index) {
+        carSlides.forEach(slide => slide.style.display = 'none');  // Hide all slides
+        carSlides[index].style.display = 'block';  // Show the active slide
+        toggleNavigationButtons(); // Check if we should hide/show navigation buttons
+    }
+
+    // Function to toggle navigation buttons based on the number of visible slides
+    function toggleNavigationButtons() {
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        if (carSlides.length > 1) {
+            prevBtn.style.display = 'block';
+            nextBtn.style.display = 'block';
+        } else {
+            prevBtn.style.display = 'none';
+            nextBtn.style.display = 'none';
+        }
+    }
+
+    // Initially show the first slide
+    showSlide(currentSlide);
+
+    // Event Listener for Next Button
+    document.getElementById('nextBtn').addEventListener('click', function() {
+        currentSlide = (currentSlide + 1) % carSlides.length;
+        showSlide(currentSlide);
+    });
+
+    // Event Listener for Previous Button
+    document.getElementById('prevBtn').addEventListener('click', function() {
+        currentSlide = (currentSlide - 1 + carSlides.length) % carSlides.length;
+        showSlide(currentSlide);
+    });
+
+    let allSlides = Array.from(document.querySelectorAll('.carousel-slide'));  // Keep a copy of all slides
+
+    // Filter Functionality
+    document.getElementById('carFilter').addEventListener('change', function() {
+        const selectedCategory = this.value;
+
+        currentSlide = 0;  // Reset to the first slide after filtering
+        let visibleSlides = [];  // Array to hold visible slides
+
+        // Check if the 'All Cars' category is selected
+        if (selectedCategory === 'all') {
+            carSlides = allSlides;  // Reset to all slides
+            carSlides.forEach(slide => slide.style.display = 'block');  // Show all slides
+            showSlide(0);  // Reset to first slide
+            return;  // No need to filter further
+        }
+
+        // Filter based on category and show/hide slides
+        allSlides.forEach(slide => {
+            const carCategory = slide.getAttribute('data-category');
+            if (carCategory === selectedCategory) {
+                slide.style.display = 'block';
+                visibleSlides.push(slide);
+            } else {
+                slide.style.display = 'none';
+            }
+        });
+
+        carSlides = visibleSlides;  // Update carSlides to the filtered visible ones
+
+        // Show the first slide in the filtered category or display a message if no slides
+        if (carSlides.length > 0) {
+            showSlide(0);  // Show the first filtered slide
+        } else {
+            document.getElementById('carousel').innerHTML = '<p>No cars available in this category</p>';
+        }
+    });
+
+    // Call the function to toggle buttons on page load
+    toggleNavigationButtons();
+</script>
+
+<script>
+    const themeToggle = document.getElementById('themeToggle');
+    const currentTheme = localStorage.getItem('theme');
+
+    // Apply the saved theme on page load
+    if (currentTheme === 'dark') {
+        document.body.classList.add('dark-theme');
+        themeToggle.checked = true;
+    }
+
+    // Toggle theme and save the user's preference
+    themeToggle.addEventListener('change', () => {
+        if (themeToggle.checked) {
+            document.body.classList.add('dark-theme');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            document.body.classList.remove('dark-theme');
+            localStorage.setItem('theme', 'light');
+        }
+    });
+</script>
+
+<script>
+    const carFilter = document.getElementById('carFilter');
+
+    // Check for saved filter on page load
+    const savedFilter = localStorage.getItem('carFilter');
+    if (savedFilter) {
+        carFilter.value = savedFilter; // Set the dropdown to the saved filter
+        applyFilter(savedFilter); // Apply the saved filter to display the relevant cars
+    }
+
+    // Event listener for dropdown change
+    carFilter.addEventListener('change', function() {
+        const selectedFilter = this.value;
+        localStorage.setItem('carFilter', selectedFilter); // Save the selected filter in local storage
+        applyFilter(selectedFilter); // Apply the selected filter
+    });
+
+    // Function to apply the filter
+    function applyFilter(filter) {
+        const allSlides = Array.from(document.querySelectorAll('.carousel-slide'));
+        let visibleSlides = [];
+
+        // Check if 'All Cars' is selected
+        if (filter === 'all') {
+            allSlides.forEach(slide => slide.style.display = 'block');
+            visibleSlides = allSlides;
+        } else {
+            allSlides.forEach(slide => {
+                const carCategory = slide.getAttribute('data-category');
+                if (carCategory === filter) {
+                    slide.style.display = 'block';
+                    visibleSlides.push(slide);
+                } else {
+                    slide.style.display = 'none';
+                }
+            });
+        }
+
+        // Update the carousel slides to only show visible ones
+        carSlides = visibleSlides;
+        showSlide(0); // Show the first visible slide
+    }
+</script>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

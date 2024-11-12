@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silk Road Car Club - Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="bg-dark text-white py-3">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+            <h1>Profile</h1>
+            <button class="btn btn-danger" onclick="logout()">Log Out</button>
+        </div>
+    </div>
+</header>
+<main class="container my-5">
+    <h2>Welcome, <span id="usernameDisplay">User</span>!</h2>
+    <p>Email: <span id="emailDisplay">example@example.com</span></p>
+</main>
+
+<script>
+    const activeUser = localStorage.getItem("activeUser");
+    const userDetails = JSON.parse(localStorage.getItem(activeUser));
+
+    if (!activeUser || !userDetails) {
+        alert("You are not logged in!");
+        window.location.href = "index.html";
+    } else {
+        document.getElementById("usernameDisplay").textContent = userDetails.username;
+        document.getElementById("emailDisplay").textContent = userDetails.email;
+    }
+
+    function logout() {
+        localStorage.removeItem("activeUser");
+        window.location.href = "index.html";
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

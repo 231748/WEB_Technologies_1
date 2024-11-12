@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silk Road Car Club - Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="bg-dark text-white py-3">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+            <h1 class="mb-0">Silk Road Car Club</h1>
+            <div>
+                <label for="themeToggle"></label>
+                <input type="checkbox" id="themeToggle" class="form-check-input"> Dark Mode
+            </div>
+            <nav class="navbar navbar-expand-lg navbar-dark">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="faq.html">FAQ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="gallery.html">Gallery</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <button class="btn btn-primary ms-2" onclick="openModal()">Log In</button>
+                            <button class="btn btn-secondary ms-2" onclick="openSignUp()">Sign Up</button>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+<main class="container my-5">
+    <h2>Welcome!</h2>
+    <p>Explore the finest cars and connect with fellow enthusiasts.</p>
+
+    <!-- Weather Display Section -->
+    <section id="weather-display" class="my-4">
+        <h3>Current Weather</h3>
+        <form id="weather-form" class="d-flex gap-2 mb-3">
+            <label for="city"></label><input type="text" id="city" placeholder="Enter city name" class="form-control">
+            <button type="submit" class="btn btn-primary">Get Weather</button>
+        </form>
+        <div id="weather-info">Enter a city name to get weather details.</div>
+    </section>
+</main>
+<footer class="bg-dark text-white py-4">
+    <div class="container text-center">
+        <p>© 2024 Silk Road Car Club</p>
+    </div>
+</footer>
+
+<!-- Login Modal -->
+<div id="modal" class="modal">
+    <h3>Log In</h3>
+    <form id="loginForm">
+        <label for="username">Username</label>
+        <input type="text" id="username" class="form-control" required>
+        <label for="password">Password</label>
+        <input type="password" id="password" class="form-control" required>
+        <button type="submit" class="btn btn-primary mt-3">Log In</button>
+    </form>
+    <button class="btn btn-secondary mt-3" onclick="closeModal()">Cancel</button>
+</div>
+
+<!-- Sign Up Modal -->
+<div id="signUpModal" class="modal">
+    <h3>Sign Up</h3>
+    <form id="signUpForm">
+        <label for="newUsername">Username</label>
+        <input type="text" id="newUsername" class="form-control" required>
+        <label for="newEmail">Email</label>
+        <input type="email" id="newEmail" class="form-control" required>
+        <label for="newPassword">Password</label>
+        <input type="password" id="newPassword" class="form-control" required>
+        <button type="submit" class="btn btn-primary mt-3">Sign Up</button>
+    </form>
+    <button class="btn btn-secondary mt-3" onclick="closeSignUp()">Cancel</button>
+</div>
+
+<!-- JavaScript Files -->
+<script src="weather.js"></script>
+<script>
+    // Dark Mode Toggle
+    const themeToggle = document.getElementById("themeToggle");
+    const currentTheme = localStorage.getItem("theme");
+    if (currentTheme === "dark") {
+        document.body.classList.add("dark-theme");
+        themeToggle.checked = true;
+    }
+    themeToggle.addEventListener("change", () => {
+        if (themeToggle.checked) {
+            document.body.classList.add("dark-theme");
+            localStorage.setItem("theme", "dark");
+        } else {
+            document.body.classList.remove("dark-theme");
+            localStorage.setItem("theme", "light");
+        }
+    });
+
+    // Login Modal
+    function openModal() {
+        document.getElementById("modal").classList.add("active");
+    }
+    function closeModal() {
+        document.getElementById("modal").classList.remove("active");
+    }
+
+    // Sign Up Modal
+    function openSignUp() {
+        closeModal();
+        document.getElementById("signUpModal").classList.add("active");
+    }
+    function closeSignUp() {
+        document.getElementById("signUpModal").classList.remove("active");
+    }
+
+    // Handle Login
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        const storedUser = JSON.parse(localStorage.getItem(username));
+
+        if (storedUser && storedUser.password === password) {
+            localStorage.setItem("activeUser", username);
+            alert("Login successful!");
+            window.location.href = "profile.html";
+        } else {
+            alert("Invalid username or password.");
+        }
+    });
+
+    // Handle Sign Up
+    document.getElementById("signUpForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+        const username = document.getElementById("newUsername").value;
+        const email = document.getElementById("newEmail").value;
+        const password = document.getElementById("newPassword").value;
+
+        if (localStorage.getItem(username)) {
+            alert("An account with this username already exists. Please log in.");
+        } else {
+            const user = { username, email, password };
+            localStorage.setItem(username, JSON.stringify(user));
+            alert("Signup successful! Please log in.");
+            closeSignUp();
+        }
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

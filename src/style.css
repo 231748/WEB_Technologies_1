@@ -1,0 +1,225 @@
+/* General Typography */
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Hero Section */
+header {
+    background: linear-gradient(135deg, #6a11cb, #2575fc); /* Gradient background */
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+header h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Buttons */
+button {
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    background-color: #495057;
+    transform: scale(1.05);
+    color: #fff;
+}
+
+/* About Us and Mission Cards */
+.row .col-lg-6 {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.row .col-lg-6 h3 {
+    font-size: 1.8rem;
+    color: #0d6efd;
+}
+
+/* Footer */
+footer {
+    background-color: #212529;
+    color: #f8f9fa;
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: #0d6efd;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+/* Dark Mode Styles */
+.dark-theme {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+.dark-theme header {
+    background: linear-gradient(135deg, #232526, #414345);
+}
+
+.dark-theme .row .col-lg-6 {
+    background-color: #333;
+    color: #e0e0e0;
+}
+
+.dark-theme footer {
+    background-color: #1c1c1c;
+}
+
+.dark-theme a {
+    color: #90caf9;
+}
+
+/* FAQ Accordion Styling for Dark Mode */
+.dark-theme .accordion-section {
+    background-color: #333; /* Darker background for accordion */
+    border: 1px solid #444; /* Subtle border to separate sections */
+}
+
+.dark-theme .accordion-header {
+    background-color: #444; /* Slightly lighter for visibility */
+    color: #fff; /* White text for contrast */
+    cursor: pointer;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.dark-theme .accordion-header:hover {
+    background-color: #555; /* Highlight on hover */
+}
+
+.dark-theme .accordion-content {
+    background-color: #333; /* Match accordion background */
+    color: #ddd; /* Light gray for readability */
+    padding: 10px;
+    border-top: 1px solid #444;
+}
+
+/* Footer Adjustments for Dark Mode */
+.dark-theme footer {
+    background-color: #1c1c1c; /* Slightly lighter than default dark background */
+    color: #e0e0e0; /* Light gray for text */
+}
+
+.dark-theme footer a {
+    color: #90caf9; /* Lighter blue for links */
+}
+
+.dark-theme footer a:hover {
+    color: #fff; /* White for hover */
+}
+
+/* Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    background-color: #fff;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 20px;
+    width: auto; /* Adjusts width to content */
+    max-width: 400px; /* Constrain width for larger screens */
+    height: auto; /* Dynamically fits content */
+    max-height: 90vh; /* Ensure it never exceeds the viewport height */
+    overflow-y: auto; /* Enable vertical scrolling for content overflow */
+    box-sizing: border-box; /* Ensures padding and border are included in dimensions */
+}
+
+/* Active State for Modal */
+.modal.active {
+    display: block;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+}
+
+.modal-overlay.active {
+    display: block;
+}
+
+/* Responsive Adjustments for Smaller Devices */
+@media (max-width: 768px) {
+    .modal {
+        width: 95%; /* Reduce width for smaller devices */
+        max-width: none; /* Remove width constraint for mobile */
+        max-height: 85vh; /* Allow a bit more height flexibility */
+        padding: 15px; /* Reduce padding */
+    }
+}
+
+/* General Typography */
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Header Styles */
+header {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* Weather Display Section */
+#weather-display {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#weather-display h3 {
+    color: #0d6efd;
+    font-size: 1.5rem;
+}
+
+#weather-info {
+    margin-top: 15px;
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Footer */
+footer {
+    background-color: #212529;
+    color: #f8f9fa;
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9rem;
+}

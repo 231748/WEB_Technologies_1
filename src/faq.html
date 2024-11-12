@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silk Road Car Club - FAQ</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .accordion-section {
+            width: 100%;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+
+        .accordion-header {
+            background-color: #f1f1f1;
+            cursor: pointer;
+            padding: 10px;
+            font-weight: bold;
+        }
+
+        .accordion-content {
+            display: none;
+            padding: 10px;
+            border-top: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<header class="bg-dark text-white py-3">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+            <h1 class="mb-0">Silk Road Car Club</h1>
+            <div>
+                <label for="themeToggle"></label><input type="checkbox" id="themeToggle" class="form-check-input"> Dark Mode
+            </div>
+            <nav class="navbar navbar-expand-lg navbar-dark">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="faq.html">FAQ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="gallery.html">Gallery</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<main class="container my-5">
+    <h2 class="mb-4">Frequently Asked Questions</h2>
+
+    <!-- Accordion -->
+    <div class="accordion-section">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+            FAQ 1: What is Silk Road Car Club?
+        </div>
+        <div class="accordion-content">
+            Silk Road Car Club is a community for car enthusiasts who enjoy sharing their passion for classic and luxury cars.
+        </div>
+    </div>
+
+    <div class="accordion-section">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+            FAQ 2: How do I become a member?
+        </div>
+        <div class="accordion-content">
+            You can become a member by selecting one of the membership options on our contact page.
+        </div>
+    </div>
+
+    <div class="accordion-section">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+            FAQ 3: What events do you organize?
+        </div>
+        <div class="accordion-content">
+            We organize various events including car shows, meet-ups, and exclusive racing events.
+        </div>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="bg-dark text-white py-4">
+    <div class="container text-center">
+        <p>© 2024 Silk Road Car Club</p>
+        <p>Yerassyl Sabyrrakhim | September 2024</p>
+        <p>Contact: <a href="mailto:231748@astanait.edu.kz">231748@astanait.edu.kz</a></p>
+    </div>
+</footer>
+
+<script>
+    // Handle FAQ toggle functionality
+    document.querySelectorAll('.faq-item').forEach(item => {
+        item.addEventListener('click', () => {
+            const answer = item.querySelector('.faq-answer');
+            if (answer.style.display === 'block') {
+                answer.style.display = 'none';
+                item.classList.remove('active');
+            } else {
+                answer.style.display = 'block';
+                item.classList.add('active');
+            }
+        });
+    });
+
+    // Handle Dark Mode toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const savedTheme = localStorage.getItem('theme');
+
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-theme');
+        themeToggle.checked = true;
+    }
+
+    themeToggle.addEventListener('change', () => {
+        if (themeToggle.checked) {
+            document.body.classList.add('dark-theme');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            document.body.classList.remove('dark-theme');
+            localStorage.setItem('theme', 'light');
+        }
+    });
+</script>
+
+<script>
+    function toggleAccordion(header) {
+        const content = header.nextElementSibling;
+        const isOpen = content.style.display === "block";
+        const allContent = document.querySelectorAll('.accordion-content');
+
+        allContent.forEach(section => section.style.display = "none");
+
+        if (!isOpen) {
+            content.style.display = "block";
+        }
+    }
+</script>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
